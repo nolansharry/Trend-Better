@@ -15,6 +15,11 @@ ul li a:hover {
   font-weight: 800;
 }
 
+.img1{
+  height: 275px;
+  width: 150px;
+}
+
 #home {
   padding: 20px;
   text-align: center;
