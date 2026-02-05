@@ -11,6 +11,10 @@ ul li a {
   padding: 10px;
 }
 
+ul li a:hover {
+  font-weight: 800;
+}
+
 #home {
   padding: 20px;
   text-align: center;
