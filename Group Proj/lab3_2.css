@@ -1,0 +1,26 @@
+ul {
+  text-align: center;
+}
+
+ul li {
+  display: inline;
+}
+ul li a {
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+}
+
+#home {
+  padding: 20px;
+  text-align: center;
+}
+
+#project_overview {
+  padding: 20px;
+  text-align: center;
+}
+
+#team_introductions {
+  text-align: center;
+}
