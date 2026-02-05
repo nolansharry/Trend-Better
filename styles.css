@@ -1,0 +1,15 @@
+nav ul{
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+nav ul li{
+    display: inline;
+    margin-left: 20px;
+}
+
+nav a{
+    text-decoration: none;
+    color: black;
+}
