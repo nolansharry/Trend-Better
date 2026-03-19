@@ -1,0 +1,16 @@
+import {Link} from "react-router-dom";
+
+function Sidebar()
+{
+    return(
+        <nav>
+            <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/Settings">Settings</Link></li>
+            </ul>
+        </nav>
+    )
+}
+
+
+export default Sidebar;
