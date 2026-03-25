@@ -1,13 +1,47 @@
-import{ useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
+// PLACEHOLDER DATA (replace with API data later)
+
+const PLACEHOLDER_USER = {
+  name: "John Doe",
+  username: "@johndoe",
+  bio: "Finance enthusiast. Investor. Always watching the market.",
+  avatarUrl: null,
+};
+
+const PLACEHOLDER_VIDEOS = [
+  { id: 1, title: "Why the Fed matters to your portfolio", views: 8400, duration: "3:12", category: "Macro", thumbnailUrl: null },
+  { id: 2, title: "Top 3 stocks to watch this week", views: 15000, duration: "4:45", category: "Equities", thumbnailUrl: null },
+  { id: 3, title: "Is crypto dead or just sleeping?", views: 22000, duration: "5:30", category: "Crypto", thumbnailUrl: null },
+  { id: 4, title: "Breaking down the latest CPI report", views: 6100, duration: "2:58", category: "Macro", thumbnailUrl: null },
+];
+
+const PLACEHOLDER_ARTICLES = [
+  { id: 1, title: "The dollar's dominance is quietly cracking", source: "Bloomberg", publishedAt: "2h ago", category: "FX", imageUrl: null },
+  { id: 2, title: "JPMorgan sees S&P at 6,800 by year-end", source: "WSJ", publishedAt: "5h ago", category: "Equities", imageUrl: null },
+  { id: 3, title: "Fed minutes reveal deeper rate cut debate", source: "Reuters", publishedAt: "1d ago", category: "Macro", imageUrl: null },
+  { id: 4, title: "Inside the AI chip shortage nobody is talking about", source: "FT", publishedAt: "2d ago", category: "Tech", imageUrl: null },
+];
+
+const PLACEHOLDER_KALSHI = {
+  stats: { total: 48, winRate: 62, profitLoss: "+$4,200" },
+  activity: [
+    { id: 1, question: "Will the Fed cut rates in May 2026?", position: "YES", stake: "$250", result: "WON", payout: "+$180" },
+    { id: 2, question: "Will BTC hit $100K before June?", position: "NO", stake: "$100", result: "LOST", payout: "-$100" },
+    { id: 3, question: "Will CPI drop below 3% in Q2?", position: "YES", stake: "$500", result: "PENDING", payout: "--" },
+    { id: 4, question: "Will NVDA beat earnings estimates?", position: "YES", stake: "$300", result: "WON", payout: "+$220" },
+  ],
+};
+
+// HELPER
 
 function fmtViews(n) {
   if (n == null) return "";
   return n >= 1000 ? `${(n / 1000).toFixed(1)}K views` : `${n} views`;
 }
 
-// ── COMPONENT ──────────────────────────────────────────────────────────────
+// COMPONENT
 
 function UserProfile() {
   const [activeTab, setActiveTab] = useState("videos");

@@ -1,15 +1,13 @@
-import {BrowserRouter, Routes, Route } from "react-router-dom";
-import UserProfile from './components/UserProfile';
+import { Routes, Route } from "react-router-dom";
+import UserProfile from "./components/UserProfile";
 
 
 function App(){
   return(
-    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<UserProile />} />
+        <Route path="/" element={<UserProfile />} />
       </Routes>
-    </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
