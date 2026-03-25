@@ -1,26 +1,40 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
+import Settings from "./pages/Settings";
+import { useEffect } from "react";
 
-import './App.css'
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import Sidebar from "./components/Sidebar.jsx";
-import Settings from "./pages/Settings.jsx";
-function App() {
+// Define a simple Home component
+const Home = () => (
+    <div className="home-content">
+        <h1 className="home-title">TrendBetter</h1>
+    </div>
+);
 
-  return (
-    <BrowserRouter>
-      <div className="app-container">
-        <aside className="sidebar-area">
-            <Sidebar/>
-        </aside>
+export default function App() {
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+    }, []);
 
-        <main className="content-area">
-            <Routes>
-                <Route path="/" element={<div>Welcome to the home page</div>}/>
-                <Route path="/Settings" element={<Settings/>}/>
-            </Routes>
-        </main>
-      </div>
-    </BrowserRouter>
-  )
+    return (
+        <BrowserRouter>
+            <div className="app-container">
+                <aside className="main-sidebar-area">
+                    <Sidebar />
+                </aside>
+
+                <main className="main-content-area">
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/settings/*" element={<Settings />} />
+                    </Routes>
+                </main>
+            </div>
+        </BrowserRouter>
+    );
 }
 
-export default App

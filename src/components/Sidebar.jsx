@@ -1,16 +1,31 @@
-import {Link} from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { Home, Settings as SettingsIcon } from "lucide-react";
 
-function Sidebar()
-{
-    return(
+export default function Sidebar() {
+    return (
         <nav>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/Settings">Settings</Link></li>
+            <ul className="main-nav-list">
+                <li>
+                    <NavLink
+                        to="/"
+                        className={({ isActive }) =>
+                            `nav-link ${isActive ? 'active' : ''}`
+                        }
+                    >
+                        <Home size={24} />
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink
+                        to="/settings"
+                        className={({ isActive }) =>
+                            `nav-link ${isActive ? 'active' : ''}`
+                        }
+                    >
+                        <SettingsIcon size={24} />
+                    </NavLink>
+                </li>
             </ul>
         </nav>
-    )
+    );
 }
-
-
-export default Sidebar;
