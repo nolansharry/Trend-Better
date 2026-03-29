@@ -35,28 +35,9 @@ function Login() {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "100vh",
-      }}
-    >
-      <div
-        style={{
-          background: "#fff",
-          borderRadius: 10,
-          border: "1px solid black",
-          padding: "40px",
-          width: "350px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "12px",
-        }}
-      >
-        <h2 style={{ color: "black" }}>Login</h2>
+    <div className="log-reg-container">
+      <div className="log-reg-card">
+        <h2>Login</h2>
 
         <InputField
           type="email"
@@ -75,10 +56,7 @@ function Login() {
 
         <Button onClick={handleSubmit}>Log In</Button>
 
-        <Link
-          to="/register"
-          style={{ color: "grey", fontSize: "16px", textDecoration: "none" }}
-        >
+        <Link className="log-reg-link" to="/register">
           Don't have an account?
         </Link>
       </div>
