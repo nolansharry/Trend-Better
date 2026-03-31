@@ -8,8 +8,7 @@
   --accent-bg: rgba(170, 59, 255, 0.1);
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
   --card-bg: #fafafa;
   --header-bg: #efefef;
   --input-bg: #fafafa;
@@ -46,8 +45,7 @@
   --accent-bg: rgba(192, 132, 252, 0.15);
   --accent-border: rgba(192, 132, 252, 0.5);
   --social-bg: rgba(47, 48, 58, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
   --card-bg: #1f2028;
   --header-bg: #2e303a;
   --input-bg: #1f2028;
@@ -71,8 +69,7 @@ body {
   flex-direction: column;
 }
 
-h1,
-h2 {
+h1, h2 {
   font-family: var(--heading);
   font-weight: 500;
   color: var(--text-h);
@@ -138,9 +135,7 @@ h2 {
   justify-content: center;
   padding: 8px;
   border-radius: 8px;
-  transition:
-    background-color 0.2s,
-    color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
   color: var(--text);
   text-decoration: none;
 }
@@ -313,9 +308,7 @@ h2 {
   margin-bottom: 12px;
 }
 
-.form-input,
-.form-textarea,
-.form-select {
+.form-input, .form-textarea, .form-select {
   width: 100%;
   padding: 12px;
   border: 1px solid var(--border);
@@ -380,7 +373,7 @@ h2 {
   right: 0;
   bottom: 0;
   background-color: var(--toggle-bg);
-  transition: 0.4s;
+  transition: .4s;
   border-radius: 24px;
 }
 
@@ -392,7 +385,7 @@ h2 {
   left: 2px;
   bottom: 2px;
   background-color: white;
-  transition: 0.4s;
+  transition: .4s;
   border-radius: 50%;
 }
 
@@ -406,9 +399,7 @@ input:checked + .slider:before {
 
 .submit-btn {
   width: 100%;
-  background-color: var(
-    --submit-disabled
-  ); /* Light blue when disabled/default */
+  background-color: var(--submit-disabled); /* Light blue when disabled/default */
   color: white;
   border: none;
   padding: 14px;
