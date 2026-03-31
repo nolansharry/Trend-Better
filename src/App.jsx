@@ -17,7 +17,7 @@ export default function App() {
     }, []);
 
     return (
-        <BrowserRouter>
+        
             <div className="app-container">
                 <aside className="main-sidebar-area">
                     <Sidebar />
@@ -32,6 +32,6 @@ export default function App() {
                     </Routes>
                 </main>
             </div>
-        </BrowserRouter>
+        
     );
 }
