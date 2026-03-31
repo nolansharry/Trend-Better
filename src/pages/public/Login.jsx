@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import InputField from "../components/InputField";
-import Button from "../components/SubmitButton";
+import InputField from "../../components/InputField";
+import Button from "../../components/SubmitButton";
 
 function Login() {
   const navigate = useNavigate();
