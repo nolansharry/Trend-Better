@@ -4,7 +4,7 @@ import {
     Bell,
     Settings as SettingsIcon,
     Moon,
-    Sun
+    Sun, BanIcon
 } from "lucide-react";
 import { useState } from "react";
 
@@ -182,6 +182,11 @@ export default function Settings() {
                                     <SettingsIcon size={20} /> Preferences
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink to="/settings/blocked-accounts" className={({ isActive }) => `settings-link ${isActive ? 'active' : ''}`}>
+                                    <BanIcon size={20} /> Blocked Accounts
+                                </NavLink>
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -196,7 +201,7 @@ export default function Settings() {
                         element={<NotificationSettings/>}
                     />
                     <Route path="preferences" element={<Preferences />} />
-                    <Route path="privacy" element={<h2 className="settings-title">Account Privacy</h2>} />
+                    <Route path="blocked-accounts" element={<h2 className="settings-title">Blocked Accounts</h2>} />
                     <Route path="*" element={<div>Route not found: {window.location.pathname}</div>} />
                 </Routes>
             </div>
