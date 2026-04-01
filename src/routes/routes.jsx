@@ -4,7 +4,7 @@ import Layout from "../pages/Layout";
 import Login from "../pages/public/Login";
 import Register from "../pages/public/Register";
 import Landing from "../pages/public/Landing";
-import Home from "../pages/private/home";
+import Home from "../pages/private/Home";
 import Settings from "../pages/private/Settings";
 
 // Optional: icons management through lucide-react

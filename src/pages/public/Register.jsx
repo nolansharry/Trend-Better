@@ -79,3 +79,46 @@ function Register() {
   );
 }
 export default Register;
+
+//integrate this into the register to match the AuthContext
+
+//Also add a username
+// import { useAuth } from "../../context/AuthContext";  // add this
+
+// function Register() {
+//   const navigate = useNavigate();
+//   const { register } = useAuth();                     // add this
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [confirm, setConfirm] = useState("");
+//   const [errors, setErrors] = useState({});
+
+//   // ... validate() stays exactly the same ...
+
+//   async function handleSubmit() {                     // make it async
+//     const newErrors = validate();
+//     if (newErrors.email || newErrors.password || newErrors.confirm) {
+//       setErrors(newErrors);
+//       return;
+//     }
+
+//     try {
+//       await register(email, password);
+//       navigate("/");
+//     } catch (err) {
+//       setErrors({ server: err.message });             // show server-side errors
+//     }
+//   }
+
+//   return (
+//     <div className="log-reg-container">
+//       <div className="log-reg-card">
+//         <h2>Create Account</h2>
+
+//         {errors.server && <p className="error">{errors.server}</p>} {/* add this */}
+
+//         {/* rest of your JSX stays the same */}
+//       </div>
+//     </div>
+//   );
+// }

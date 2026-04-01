@@ -23,10 +23,26 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("user");
   };
 
+  const register = async (email, password) => {
+  const res = await fetch("http://localhost:3000/api/auth/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",                          // ✅ sends/receives the session cookie
+    body: JSON.stringify({ email, password }),
+  });
+
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message);        // bubble up server errors
+
+  setUser({ id: data.userId, email });
+  localStorage.setItem("user", JSON.stringify({ id: data.userId, email }));
+};
+
+// Add it to the Provider value
+
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ user, login, logout, register }}></AuthContext.Provider>
   );
 }
 
