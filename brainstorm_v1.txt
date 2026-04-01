@@ -1,0 +1,53 @@
+In this case, we want you to finalize your team members and start to discuss  
+
+following questions for the final project: 
+
+• Q1: Team Name (As cool as possible) TrendBetter (Temporarily) 
+
+ 
+
+• Q2: Team Members’ Names 
+
+Nolan Sharry 
+
+Brian Sanchez 
+
+Dalton Crawford 
+
+Amil Zeynalli 
+
+• Q3: What is the problem you plan to solve? 
+
+We are trying to collect all of the financial information connected together in a focused site.  
+
+We want to help people stay connected to the current trends in finance, and gauge investor sentiment.  
+
+• Q4: What is your idea? 
+
+Finance Social App with 4 feeds and profile.  
+
+News, Stock Prices, Betting Market, Tweets, and a User Profile 
+
+Trendbetter.online 
+
+Trendsetter: Scrollable Media by Subject: Finance Focus -> Scrollable Media Tab, Stock Prices Tab, Congruent Futures Tab 
+
+*First Iteration: TrendBetter, Just Scrollable Media, In future Articles, Then Kalshi API 
+
+• Q5: Who are the target users/customers? 
+
+Investors, Pundits, Doomscrollers, Peers, Entertainment Seekers, Media Consumption, Gamblers, Finance Bros 
+
+• Q6: Why is it a good idea? 
+
+This is a good idea because this is what every smart or ambitious person wants to do with their social media, to educate themselves with the news, be a little entertained, and maybe make a profit.  
+
+Each team can have up to 4 members. Along the way to work for Assignment 1, I would also recommend the team finish the following tasks as well: 
+
+• Create a shared GIT repository 
+
+• Set up a shared working platform (Google doc, Dropbox, etc.) 
+
+• Maintain a list of all team members’ contact information (Email, phone,  
+
+messaging, etc.) 
