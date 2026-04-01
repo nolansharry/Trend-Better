@@ -221,6 +221,9 @@ function UserProfile() {
 
       </div>
 
+      {/* Bottom nav */}
+
+
     </div>
   );
 }
