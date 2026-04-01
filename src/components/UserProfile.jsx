@@ -222,17 +222,7 @@ function UserProfile() {
       </div>
 
       {/* Bottom nav */}
-      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "#fff", borderTop: "1px solid #e5e5e5", display: "flex" }}>
-        <Link to="/videos" style={{ flex: 1, padding: "14px 0", textAlign: "center", fontSize: 13, fontWeight: 600, color: "#000", textDecoration: "none", borderRight: "1px solid #e5e5e5" }}>
-          Videos
-        </Link>
-        <Link to="/news" style={{ flex: 1, padding: "14px 0", textAlign: "center", fontSize: 13, fontWeight: 600, color: "#000", textDecoration: "none", borderRight: "1px solid #e5e5e5" }}>
-          News
-        </Link>
-        <Link to="/predict" style={{ flex: 1, padding: "14px 0", textAlign: "center", fontSize: 13, fontWeight: 600, color: "#000", textDecoration: "none" }}>
-          Predict
-        </Link>
-      </div>
+      
 
     </div>
   );
