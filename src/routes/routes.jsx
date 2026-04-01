@@ -8,7 +8,8 @@ import Home from "../pages/private/home";
 import Settings from "../pages/private/Settings";
 
 // Optional: icons management through lucide-react
-import { House, Settings as SettingsIcon, LogIn, UserPlus } from "lucide-react";
+import {House, Settings as SettingsIcon, LogIn, UserPlus, User} from "lucide-react";
+import UserProfile from "../pages/private/UserProfile.jsx";
 
 export const ROUTE_PATHS = {
   HOME: "/",
@@ -46,6 +47,14 @@ export function useAppRoutes() {
             element: user ? <Home /> : <Landing />,
             label: "Home",
             icon: House,
+            showInNav: true,
+        },
+        {
+
+            path: "/profile",
+            element: <UserProfile />,
+            label: "Profile",
+            icon: User,
             showInNav: true,
         },
         {
