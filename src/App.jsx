@@ -1,13 +1,7 @@
-import { Routes, Route } from "react-router-dom";
-import UserProfile from "./components/UserProfile";
+import { useRoutes } from "react-router-dom";
+import { useAppRoutes } from "./routes/routes";
 
-
-function App(){
-  return(
-      <Routes>
-        <Route path="/" element={<UserProfile />} />
-      </Routes>
-  );
+export default function App() {
+  const routes = useAppRoutes();
+  return useRoutes(routes);
 }
-
-export default App;
