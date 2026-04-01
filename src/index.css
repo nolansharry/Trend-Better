@@ -20,8 +20,8 @@
   --primary-hover: #1877f2;
   --submit-disabled: #b2dffc;
 
-  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
-  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
@@ -433,33 +433,4 @@ input:checked + .slider:before {
 .counter:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
-}
-
-/* Login and Registration */
-.log-reg-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-.log-reg-card {
-  background: #fff;
-  border-radius: 10px;
-  border: 1px solid black;
-  padding: 40px;
-  width: 350px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.log-reg-card h2 {
-  color: black;
-}
-
-.log-reg-link {
-  color: grey;
-  font-size: 16px;
-  text-decoration: None;
 }
