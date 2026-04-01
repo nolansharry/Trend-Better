@@ -1,8 +1,7 @@
-import { Routes, Route } from "react-router-dom";
 import { useRoutes } from "react-router-dom";
-import { routes } from "./routes/routes";
+import { useAppRoutes } from "./routes/routes";
 
 export default function App() {
-  const element = useRoutes(routes);
-  return element;
+  const routes = useAppRoutes();
+  return useRoutes(routes);
 }
