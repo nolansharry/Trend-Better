@@ -56,7 +56,7 @@ function UserProfile() {
     : "?";
 
   return (
-    <div style={{ minHeight: "100vh", background: "#fff", color: "#000", fontFamily: "system-ui, -apple-system, sans-serif" }}>
+    <div style={{ minHeight: "100vh", width: "100%", flex: 1,   background: "#fff", color: "#000", fontFamily: "system-ui, -apple-system, sans-serif" }}>
 
       {/* Header */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", borderBottom: "1px solid #e5e5e5" }}>
@@ -220,10 +220,6 @@ function UserProfile() {
         )}
 
       </div>
-
-      {/* Bottom nav */}
-
-
     </div>
   );
 }
