@@ -5,10 +5,11 @@ import Login from "../pages/public/Login";
 import Register from "../pages/public/Register";
 import Landing from "../pages/public/Landing";
 import Home from "../pages/private/home";
+import Feed from "../pages/private/Feed";
 import Settings from "../pages/private/Settings";
 
 // Optional: icons management through lucide-react
-import {House, Settings as SettingsIcon, LogIn, UserPlus, User} from "lucide-react";
+import {House, Settings as SettingsIcon, LogIn, UserPlus, User, Handshake} from "lucide-react";
 import UserProfile from "../pages/private/UserProfile.jsx";
 
 export const ROUTE_PATHS = {
@@ -50,6 +51,13 @@ export function useAppRoutes() {
             showInNav: true,
         },
         {
+            path: "/feed",
+            element: <Feed />,
+            label: "Feed",
+            icon: Handshake,
+            showInNav: true,
+        },
+        {
 
             path: "/profile",
             element: <UserProfile />,
@@ -63,7 +71,8 @@ export function useAppRoutes() {
         label: "Settings",
         icon: SettingsIcon,
         showInNav: true,
-      },
+       },
+       
     ],
   },
 ];
