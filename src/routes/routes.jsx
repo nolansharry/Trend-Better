@@ -8,6 +8,12 @@ import Home from "../pages/private/Home";
 import Feed from "../pages/private/Feed";
 import Settings from "../pages/private/Settings";
 
+import EditProfile from "../components/settings/EditProfile";
+import Preferences from "../components/settings/Preferences";
+import NotificationSettings from "../components/settings/NotificationSettings";
+import BlockedAccounts from "../components/settings/BlockedAccounts";
+import SettingsOverlay from "../components/settings/SettingsOverlay";
+
 // Optional: icons management through lucide-react
 import {House, Settings as SettingsIcon, LogIn, UserPlus, User, Handshake} from "lucide-react";
 import UserProfile from "../pages/private/UserProfile.jsx";
@@ -66,12 +72,19 @@ export function useAppRoutes() {
             showInNav: true,
         },
         {
-            path: "settings/*",
-        element: <Settings />,
-        label: "Settings",
-        icon: SettingsIcon,
-        showInNav: true,
-       },
+            path: "/settings/*",
+            element: <Settings />,
+            label: "Settings",
+            icon: SettingsIcon,
+            showInNav: true,
+             children: [
+                { index: true,                    element: <SettingsOverlay /> },
+                { path: "edit-profile",           element: <EditProfile /> },
+                { path: "notifications",          element: <NotificationSettings /> },
+                { path: "preferences",            element: <Preferences /> },
+                { path: "blocked-accounts",       element: <BlockedAccounts /> },
+            ],
+        },
        
     ],
   },
