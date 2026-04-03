@@ -40,13 +40,6 @@ const SportsCard = ({ prop }) => {
     status !== "upcoming"
       ? 100
       : Math.max(0, Math.min(100, (1 - msUntilGame / WINDOW_MS) * 100));
-
-  const barColor =
-    status === "live"
-      ? "#E24B4A"
-      : status === "ended"
-        ? "var(--color-border-secondary)"
-        : "var(--color-text-secondary)";
   return (
     <div className="pp-card">
       <img src={playerImage} className="pp-player-img" />
