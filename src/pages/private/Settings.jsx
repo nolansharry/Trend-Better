@@ -3,8 +3,7 @@ import {
     User,
     Bell,
     Settings as SettingsIcon,
-    Moon,
-    Sun, BanIcon
+    BanIcon
 } from "lucide-react";
 
 
