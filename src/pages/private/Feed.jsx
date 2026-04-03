@@ -278,7 +278,14 @@ export default function Feed({ fetchItems }) {
   };
 
   return (
-    <div style={{ maxWidth: 620, margin: "0 auto", padding: "1.5rem 1rem" }}>
+    <div
+      style={{
+        maxWidth: 620,
+        margin: "0 auto",
+        padding: "1.5rem 1rem",
+        width: "100%",
+      }}
+    >
       {/* Filter bar */}
       <div
         style={{
