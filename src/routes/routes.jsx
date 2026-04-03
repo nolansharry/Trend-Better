@@ -4,7 +4,7 @@ import Layout from "../pages/Layout";
 import Login from "../pages/public/Login";
 import Register from "../pages/public/Register";
 import Landing from "../pages/public/Landing";
-import Home from "../pages/private/home";
+import Home from "../pages/private/Home";
 import Feed from "../pages/private/Feed";
 import Settings from "../pages/private/Settings";
 
