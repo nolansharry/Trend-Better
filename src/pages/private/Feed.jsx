@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import SportsCard from "../../components/SportsCard";
 import NewsCard from "../../components/NewsCard";
 import TweetCard from "../../components/TweetCard";
+import { MOCK_DATA } from "../../data/mockData";
 
 const FILTERS = [
   { label: "All", value: "all" },
@@ -25,126 +26,7 @@ const PAGE_SIZE = 10;
  * If no fetchItems prop is provided, falls back to MOCK_DATA for development.
  */
 
-const MOCK_DATA = [
-  {
-    id: "k1",
-    type: "sports",
-    player: "Jayson Tatum",
-    team: "BOS",
-    playerId: 4065648,
-    opponent: "MIA",
-    market: "Points",
-    line: 28.5,
-    overOdds: 0.57,
-    underOdds: 0.43,
-    commence_time: "2026-04-01T19:00:00Z",
-  },
-  {
-    id: "n1",
-    type: "news",
-    headline: "Fed minutes signal growing caution over inflation stalling",
-    summary:
-      "Officials expressed concern that progress on inflation may have plateaued, complicating the path toward rate cuts later this year.",
-    source: "Reuters",
-    category: "Economy",
-    timestamp: "3 hours ago",
-    url: "https://reuters.com",
-  },
-  {
-    id: "t1",
-    type: "tweet",
-    handle: "@NickTimiraos",
-    displayName: "Nick Timiraos",
-    affiliation: "WSJ",
-    body: "The May meeting is live in a way markets aren't fully pricing. Chair Powell has left the door open more than his colleagues.",
-    timestamp: "2h ago",
-    likes: "4.1K",
-    isExternal: true,
-  },
-  {
-    id: "k2",
-    type: "sports",
-    player: "Jimmy Butler",
-    team: "GSW",
-    playerId: 6430,
-    opponent: "ATL",
-    market: "Points",
-    line: 24.5,
-    overOdds: 0.49,
-    underOdds: 0.51,
-    commence_time: "2026-04-03T16:00:00Z",
-  },
-  {
-    id: "n2",
-    type: "news",
-    headline: "Tech earnings season kicks off with mixed signals from megacaps",
-    summary:
-      "Alphabet beat expectations while Microsoft guided cautiously, leaving investors uncertain about AI spending momentum.",
-    source: "Bloomberg",
-    category: "Technology",
-    timestamp: "1 hour ago",
-    url: "https://bloomberg.com",
-  },
-  {
-    id: "t2",
-    type: "tweet",
-    handle: "@unusual_whales",
-    displayName: "Unusual Whales",
-    affiliation: null,
-    body: "SPY options flow going into tomorrow's open is heavily skewed to puts. Largest single bet seen in 3 weeks.",
-    timestamp: "45m ago",
-    likes: "12.3K",
-    isExternal: true,
-  },
-  {
-    id: "k3",
-    type: "sports",
-    player: "LeBron James",
-    team: "LAL",
-    playerId: 1966,
-    opponent: "DEN",
-    market: "Assists",
-    line: 7.5,
-    overOdds: 0.51,
-    underOdds: 0.49,
-    commence_time: "2026-04-05T19:00:00Z",
-  },
-  {
-    id: "n3",
-    type: "news",
-    headline: "Treasury yields climb as debt ceiling negotiations stall",
-    summary:
-      "Investors are pricing in renewed fiscal uncertainty as Congress struggles to reach a deal before the summer deadline.",
-    source: "FT",
-    category: "Fixed Income",
-    timestamp: "30 minutes ago",
-    url: "https://ft.com",
-  },
-  {
-    id: "t3",
-    type: "tweet",
-    handle: "@KobeissiLetter",
-    displayName: "The Kobeissi Letter",
-    affiliation: null,
-    body: "BREAKING: Treasury Secretary signals willingness to invoke extraordinary measures as early as next month. This changes the calculus on rate cuts.",
-    timestamp: "15m ago",
-    likes: "8.7K",
-    isExternal: true,
-  },
-  {
-    id: "k4",
-    type: "sports",
-    player: "Nikola Jokic",
-    team: "DEN",
-    playerId: 3112335,
-    opponent: "LAL",
-    market: "Rebounds",
-    line: 11.5,
-    overOdds: 0.58,
-    underOdds: 0.42,
-    commence_time: "2026-04-12T23:00:00Z",
-  },
-];
+
 
 function mockFetch(filter, page) {
   return new Promise((resolve) => {
