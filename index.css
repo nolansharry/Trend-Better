@@ -450,13 +450,15 @@ input:checked + .slider:before {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background: var(--bg);
 }
+
 .log-reg-card {
-  background: #fff;
-  border-radius: 10px;
-  border: 1px solid black;
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 0.5px solid var(--border);
   padding: 40px;
-  width: 350px;
+  width: 360px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -464,13 +466,24 @@ input:checked + .slider:before {
 }
 
 .log-reg-card h2 {
-  color: black;
+  font-family: var(--mono);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text-h);
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
 }
 
 .log-reg-link {
-  color: grey;
-  font-size: 16px;
-  text-decoration: None;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-family: var(--mono);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.log-reg-link:hover {
+  color: rgb(2, 170, 2);
 }
 
 /* Card */
