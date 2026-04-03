@@ -26,8 +26,6 @@ const PAGE_SIZE = 10;
  * If no fetchItems prop is provided, falls back to MOCK_DATA for development.
  */
 
-
-
 function mockFetch(filter, page) {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -79,8 +77,8 @@ function Spinner() {
         style={{
           width: 24,
           height: 24,
-          border: "2px solid var(--color-border-tertiary)",
-          borderTopColor: "var(--color-text-secondary)",
+          border: "2px solid black",
+          borderTopColor: "var(--accent)",
           borderRadius: "50%",
           animation: "spin 0.7s linear infinite",
         }}
@@ -97,6 +95,7 @@ export default function Feed({ fetchItems }) {
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isInitializing, setIsInitializing] = useState(true);
 
   const sentinelRef = useRef(null);
   const observerRef = useRef(null);
@@ -107,6 +106,7 @@ export default function Feed({ fetchItems }) {
     let cancelled = false;
 
     const load = async () => {
+      setIsInitializing(true);
       setLoading(true);
       setError(null);
       setItems([]);
@@ -120,9 +120,14 @@ export default function Feed({ fetchItems }) {
         setHasMore(more);
         setPage(0);
       } catch {
-        if (!cancelled) setError("Failed to load feed. Please try again.");
+        if (!cancelled) {
+          setError("Failed to load feed. Please try again.");
+        }
       } finally {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) {
+          setIsInitializing(false);
+          setLoading(false);
+        }
       }
     };
 
@@ -170,48 +175,21 @@ export default function Feed({ fetchItems }) {
   }, [hasMore, loading, page, activeFilter]);
 
   return (
-    <div
-      style={{
-        maxWidth: 620,
-        margin: "0 auto",
-        padding: "1.5rem 1rem",
-        width: "100%",
-      }}
-    >
+    <div className="feed-container">
       {/* Filter bar */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: 8,
-          flexWrap: "wrap",
-          marginBottom: "1.25rem",
-        }}
-      >
+      <div className="filter-bar">
         {FILTERS.map((f) => (
           <button
+            className="filter-btn"
+            style={{
+              border:
+                activeFilter === f.value ? "none" : "0.5px solid var(--accent)",
+              background:
+                activeFilter === f.value ? "var(--accent-bg)" : "transparent",
+              color: activeFilter === f.value ? "green" : "var(--accent)",
+            }}
             key={f.value}
             onClick={() => setActiveFilter(f.value)}
-            style={{
-              fontSize: 13,
-              padding: "5px 14px",
-              borderRadius: 999,
-              border:
-                activeFilter === f.value
-                  ? "none"
-                  : "0.5px solid var(--color-border-secondary)",
-              background:
-                activeFilter === f.value
-                  ? "var(--color-text-primary)"
-                  : "transparent",
-              color:
-                activeFilter === f.value
-                  ? "var(--color-background-primary)"
-                  : "var(--color-text-secondary)",
-              cursor: "pointer",
-              fontFamily: "var(--font-sans)",
-              transition: "all 0.15s",
-            }}
           >
             {f.label}
           </button>
@@ -221,7 +199,7 @@ export default function Feed({ fetchItems }) {
       {/* Feed items */}
       <div>
         {items.map((item) => (
-          <div key={item.id} style={{ marginBottom: 12, width: "100%" }}>
+          <div key={item.id} className="feed-items">
             <CardRouter item={item} />
           </div>
         ))}
@@ -229,60 +207,25 @@ export default function Feed({ fetchItems }) {
 
       {/* Error */}
       {error && (
-        <div
-          style={{
-            textAlign: "center",
-            padding: "1.5rem",
-            color: "var(--color-text-danger)",
-            fontSize: 14,
-          }}
-        >
+        <div className="feed-error">
           {error}
-          <button
-            onClick={() => loadMore()}
-            style={{
-              marginLeft: 8,
-              textDecoration: "underline",
-              cursor: "pointer",
-              background: "none",
-              border: "none",
-              color: "inherit",
-            }}
-          >
+          <button onClick={() => loadMore()} className="feed-retry-btn">
             Retry
           </button>
         </div>
       )}
 
-      {loading && <Spinner />}
+      {isInitializing && <Spinner />}
 
       {!hasMore && !loading && items.length > 0 && (
-        <div
-          style={{
-            textAlign: "center",
-            padding: "2rem 0",
-            fontSize: 13,
-            color: "var(--color-text-tertiary)",
-          }}
-        >
-          You're all caught up
-        </div>
+        <div className="feed-end">You're all caught up</div>
       )}
 
-      {!loading && items.length === 0 && !error && (
-        <div
-          style={{
-            textAlign: "center",
-            padding: "3rem 0",
-            fontSize: 14,
-            color: "var(--color-text-tertiary)",
-          }}
-        >
-          No items found for this filter.
-        </div>
+      {!loading && !isInitializing && items.length === 0 && !error && (
+        <div className="feed-empty">No items found for this filter.</div>
       )}
 
-      <div ref={sentinelRef} style={{ height: 1 }} />
+      <div ref={sentinelRef} />
     </div>
   );
 }

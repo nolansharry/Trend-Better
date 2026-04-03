@@ -672,3 +672,57 @@ input:checked + .slider:before {
     opacity: 0.2;
   }
 }
+
+/* Feed Page */
+.feed-container {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.filter-btn {
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.feed-items {
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.feed-error {
+  text-align: center;
+  padding: 1.5rem;
+  color: red;
+  font-size: 14;
+}
+.feed-retry-btn {
+  margin-left: 8;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+}
+.feed-end {
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 13px;
+}
+.feed-empty {
+  text-align: center;
+  padding: 3rem 0;
+  font-size: 14px;
+}
