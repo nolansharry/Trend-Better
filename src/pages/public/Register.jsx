@@ -31,14 +31,39 @@ function Register() {
     return newErrors;
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     const newErrors = validate();
     if (newErrors.email || newErrors.password || newErrors.confirm) {
       setErrors(newErrors);
       return;
     }
-    // TODO: waiting for database to continue this part
-    navigate("/");
+
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        }),
+      });
+
+      const data = await response.json();
+
+      if(!response.ok)
+      {
+        setErrors({email: data.error || "Registration Failed"});
+        return;
+      }
+
+      alert("Registration Successful! You can now log in.");
+      navigate("/login");
+    } catch(err) {
+      console.error("Failed to connect to the server:", err);
+      setErrors({email: "Server error. Is the backend running? "});
+    }
   }
   return (
     <div className="log-reg-container">
