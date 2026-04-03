@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import SportsCard from "../../components/SportsCard";
 import NewsCard from "../../components/NewsCard";
 import TweetCard from "../../components/TweetCard";
