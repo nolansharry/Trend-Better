@@ -216,66 +216,76 @@ export default function Feed({ fetchItems }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const observerRef = useRef(null);
   const sentinelRef = useRef(null);
-
+  const observerRef = useRef(null);
   const fetcher = fetchItems || mockFetch;
 
-  const loadPage = useCallback(
-    async (filter, pageNum, replace = false) => {
-      if (loading) return;
+  // Runs fresh on every filter change
+  useEffect(() => {
+    let cancelled = false;
+
+    const load = async () => {
       setLoading(true);
       setError(null);
+      setItems([]);
       try {
         const { items: newItems, hasMore: more } = await fetcher(
-          filter,
-          pageNum,
+          activeFilter,
+          0,
         );
-        setItems((prev) => (replace ? newItems : [...prev, ...newItems]));
+        if (cancelled) return;
+        setItems(newItems);
         setHasMore(more);
-        setPage(pageNum);
-      } catch (err) {
-        setError("Failed to load feed. Please try again.");
+        setPage(0);
+      } catch {
+        if (!cancelled) setError("Failed to load feed. Please try again.");
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
-    },
-    [fetcher, loading],
-  );
+    };
 
-  // Initial load and filter changes
-  useEffect(() => {
-    setItems([]);
-    setPage(0);
-    setHasMore(true);
-    loadPage(activeFilter, 0, true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    load();
+    return () => {
+      cancelled = true;
+    };
   }, [activeFilter]);
 
-  // Infinite scroll via IntersectionObserver
+  // Load next page (called by IntersectionObserver only)
+  const loadMore = async () => {
+    if (loading || !hasMore) return;
+    setLoading(true);
+    try {
+      const nextPage = page + 1;
+      const { items: newItems, hasMore: more } = await fetcher(
+        activeFilter,
+        nextPage,
+      );
+      setItems((prev) => [...prev, ...newItems]);
+      setHasMore(more);
+      setPage(nextPage);
+    } catch {
+      setError("Failed to load more.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Infinite scroll
   useEffect(() => {
     if (observerRef.current) observerRef.current.disconnect();
 
     observerRef.current = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasMore && !loading) {
-          loadPage(activeFilter, page + 1);
+          loadMore();
         }
       },
       { threshold: 0.1 },
     );
 
-    if (sentinelRef.current) {
-      observerRef.current.observe(sentinelRef.current);
-    }
-
+    if (sentinelRef.current) observerRef.current.observe(sentinelRef.current);
     return () => observerRef.current?.disconnect();
-  }, [hasMore, loading, page, activeFilter, loadPage]);
-
-  const handleFilterChange = (value) => {
-    if (value === activeFilter) return;
-    setActiveFilter(value);
-  };
+  }, [hasMore, loading, page, activeFilter]);
 
   return (
     <div
@@ -290,6 +300,7 @@ export default function Feed({ fetchItems }) {
       <div
         style={{
           display: "flex",
+          justifyContent: "center",
           gap: 8,
           flexWrap: "wrap",
           marginBottom: "1.25rem",
@@ -298,7 +309,7 @@ export default function Feed({ fetchItems }) {
         {FILTERS.map((f) => (
           <button
             key={f.value}
-            onClick={() => handleFilterChange(f.value)}
+            onClick={() => setActiveFilter(f.value)}
             style={{
               fontSize: 13,
               padding: "5px 14px",
@@ -328,13 +339,13 @@ export default function Feed({ fetchItems }) {
       {/* Feed items */}
       <div>
         {items.map((item) => (
-          <div key={item.id} style={{ marginBottom: 12 }}>
+          <div key={item.id} style={{ marginBottom: 12, width: "100%" }}>
             <CardRouter item={item} />
           </div>
         ))}
       </div>
 
-      {/* Error state */}
+      {/* Error */}
       {error && (
         <div
           style={{
@@ -346,7 +357,7 @@ export default function Feed({ fetchItems }) {
         >
           {error}
           <button
-            onClick={() => loadPage(activeFilter, page)}
+            onClick={() => loadMore()}
             style={{
               marginLeft: 8,
               textDecoration: "underline",
@@ -361,10 +372,8 @@ export default function Feed({ fetchItems }) {
         </div>
       )}
 
-      {/* Loading spinner */}
       {loading && <Spinner />}
 
-      {/* End of feed message */}
       {!hasMore && !loading && items.length > 0 && (
         <div
           style={{
@@ -378,7 +387,6 @@ export default function Feed({ fetchItems }) {
         </div>
       )}
 
-      {/* Empty state */}
       {!loading && items.length === 0 && !error && (
         <div
           style={{
@@ -392,7 +400,6 @@ export default function Feed({ fetchItems }) {
         </div>
       )}
 
-      {/* Invisible sentinel for IntersectionObserver */}
       <div ref={sentinelRef} style={{ height: 1 }} />
     </div>
   );
