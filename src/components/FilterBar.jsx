@@ -17,7 +17,7 @@ import { useRef, useState, useEffect } from "react";
 
 const DEFAULT_FILTERS = [
   { label: "All",            value: "all"    },
-  { label: "Kalshi Markets", value: "kalshi" },
+  { label: "Sports Bets",    value: "sports" },
   { label: "News",           value: "news"   },
   { label: "Tweets",         value: "tweet"  },
 ];

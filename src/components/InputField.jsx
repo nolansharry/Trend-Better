@@ -6,20 +6,11 @@ function InputField({ type, placeholder, value, onChange, error }) {
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        style={{
-          width: "100%",
-          padding: "10px",
-          borderRadius: 5,
-          border: error ? "1px solid red" : "1px solid #ccc",
-          boxSizing: "border-box",
-          background: "white",
-          color: "black",
-          outline: error ? "none" : undefined,
-        }}
+        className="form-input"
+        style={error ? { borderColor: "var(--color-text-danger, red)" } : {}}
       />
-      {error && <p style={{ color: "red", fontSize: 12, margin: 0 }}>{error}</p>}
+      {error && <p style={{ color: "red", fontSize: 12, margin: "4px 0 0" }}>{error}</p>}
     </div>
   );
 }
-
 export default InputField;
