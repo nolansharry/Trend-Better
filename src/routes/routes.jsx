@@ -66,12 +66,12 @@ export function useAppRoutes() {
             showInNav: true,
         },
         {
-            path: "settings/*",
-        element: <Settings />,
-        label: "Settings",
-        icon: SettingsIcon,
-        showInNav: true,
-       },
+            path: "/settings/*",
+            element: <Settings />,
+            label: "Settings",
+            icon: SettingsIcon,
+            showInNav: true,
+        },
        
     ],
   },

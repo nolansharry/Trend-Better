@@ -194,14 +194,16 @@ export default function Settings() {
 
             <div className="settings-content">
                 <Routes>
-                    <Route index element={<Navigate to="edit-profile" replace />} />
+                    <Route path="settings/*" element={<Navigate to="edit-profile" replace />} />
+                    
                     <Route path="edit-profile" element={<EditProfile />} />
-                    <Route
-                        path="notifications"
-                        element={<NotificationSettings/>}
-                    />
-                    <Route path="preferences" element={<Preferences />} />
-                    <Route path="blocked-accounts" element={<h2 className="settings-title">Blocked Accounts</h2>} />
+                    
+                    <Route path="notifications/*" element={<NotificationSettings />} />
+                    
+                    <Route path="preferences/*" element={<Preferences />} />
+                    
+                    <Route path="blocked-accounts/*" element={<h2 className="settings-title">Blocked Accounts</h2>} />
+                    
                     <Route path="*" element={<div>Route not found: {window.location.pathname}</div>} />
                 </Routes>
             </div>
