@@ -706,10 +706,10 @@ input:checked + .slider:before {
   text-align: center;
   padding: 1.5rem;
   color: red;
-  font-size: 14;
+  font-size: 14px;
 }
 .feed-retry-btn {
-  margin-left: 8;
+  margin-left: 8px;
   text-decoration: underline;
   cursor: pointer;
   background: none;
@@ -725,4 +725,78 @@ input:checked + .slider:before {
   text-align: center;
   padding: 3rem 0;
   font-size: 14px;
+}
+
+/* Home Page */
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+.home-left {
+  max-width: 550px;
+  margin-right: 30%;
+  /* border: 1px solid black; */
+}
+.home-tb {
+  font-family: var(--mono);
+  font-size: 48px;
+  font-weight: 500;
+  color: black;
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+.home-tb span {
+  color: var(--accent);
+}
+.home-desc {
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 450px;
+  margin-left: 10%;
+  white-space: nowrap;
+}
+.home-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 160px;
+  align-items: stretch;
+}
+.home-btn {
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 10px 24px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+.home-btn-primary {
+  background: var(--text-h);
+  color: var(--bg);
+  border: none;
+}
+.home-btn-primary:hover {
+  opacity: 0.8;
+}
+.home-btn-outline {
+  background: transparent;
+  color: var(--text-h);
+  border: 0.5px solid var(--border);
+}
+.home-btn-outline:hover,
+.home-btn-ghost:hover {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.home-btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 0.5px solid var(--border);
 }
