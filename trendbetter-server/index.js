@@ -4,6 +4,8 @@ const cors = require("cors");
 const session = require("express-session");
 const MongoStore = require("connect-mongo").default;
 const connectDB = require("./config/db");
+
+const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 
 const app = express();
@@ -29,6 +31,8 @@ app.use(session({
 // Routes
 app.use("/api/auth", authRoutes);
 app.get("/", (req, res) => res.send("TrendBetter API is running!"));
+app.use("/api/users", userRoutes);
+
 
 // Start
 const PORT = process.env.PORT || 5000;
