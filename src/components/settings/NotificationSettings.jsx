@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Bell } from "lucide-react";
+
 export default function NotificationSettings() {
     const [pushNotificationsEnabled, setPushNotificationsEnabled] = useState(false)
     const [emailNotificationsEnabled, setEmailNotificationsEnabled] = useState(false)

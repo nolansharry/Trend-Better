@@ -42,8 +42,6 @@ export default function Settings() {
                 </div>
             </aside>
 
-            
-
             <div className="settings-content">
                 <Outlet />
             </div>
