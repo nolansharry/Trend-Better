@@ -1,13 +1,16 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAppRoutes } from "../routes/routes";
 import { useAuth } from "../context/AuthContext";
+import { LogOut } from "lucide-react";
 
 
 
 export default function Sidebar() {
   
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const routes = useAppRoutes();
+
+    const navigate = useNavigate();
 
     const navItems = flattenRoutes(routes).filter(r => {
     if (!r.showInNav) return false;
@@ -19,6 +22,11 @@ export default function Sidebar() {
     return routeArray.flatMap(route =>
         route.children ? route.children : route
     );
+    }
+
+    const handleLogout = () => {
+      logout();
+      navigate("/login");
     }
 
   return (
@@ -36,12 +44,33 @@ export default function Sidebar() {
                 }
               >
                 {Icon && <Icon size={24} />}
-                {/* Optional: show label if you want text */}
-                {/* <span>{route.label}</span> */}
               </NavLink>
             </li>
           );
         })}
+
+        {user && (
+          <li>
+            <button
+              onClick={handleLogout}
+              className="nav-link"
+              title="Sign Out"
+              style={{
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                padding: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+                color: "inherit"
+              }}
+            >
+              <LogOut size={24} />
+            </button>
+          </li>
+        )}
       </ul>
     </nav>
   );
