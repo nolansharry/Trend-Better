@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 // PLACEHOLDER DATA (replace with API data later)
 
@@ -99,8 +100,15 @@ function fmtCount(n) {
 
 function UserProfile() {
   const [activeTab, setActiveTab] = useState("videos");
+  const {user: authUser} = useAuth();
 
-  const user = PLACEHOLDER_USER;
+  const user = {
+    name: authUser?.fullName || "TrendBetter User",
+    username: authUser?.email ? `@${authUser.email.split('@')[0]}` : "@user", // Creates a fake handle from their email
+    bio: authUser?.bio || "Finance enthusiast. Investor. Always watching the market.",
+    avatarUrl: authUser?.avatarUrl || null,
+  };
+
   const videos = PLACEHOLDER_VIDEOS;
   const articles = PLACEHOLDER_ARTICLES;
   const tweets = PLACEHOLDER_TWEETS;

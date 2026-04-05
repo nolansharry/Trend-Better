@@ -9,9 +9,17 @@ function Register() {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [errors, setErrors] = useState({});
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   function validate() {
     const newErrors = {};
+    if (!firstName) {
+      newErrors.firstName = "First name is required";
+    }
+    if (!lastName) {
+      newErrors.lastName = "Last name is required";
+    }
     if (!email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
@@ -42,27 +50,25 @@ function Register() {
       const response = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: email,
-          password: password
+          password: password,
+          fullName: `${firstName} ${lastName}`.trim(),
         }),
       });
 
       const data = await response.json();
-
-      if(!response.ok)
-      {
-        setErrors({email: data.error || "Registration Failed"});
+      if (!response.ok) {
+        setErrors({ email: data.error || "Registration Failed" });
         return;
       }
 
-      alert("Registration Successful! You can now log in.");
       navigate("/login");
-    } catch(err) {
+    } catch (err) {
       console.error("Failed to connect to the server:", err);
-      setErrors({email: "Server error. Is the backend running? "});
+      setErrors({ email: "Server error. Is the backend running? " });
     }
   }
   return (
@@ -70,6 +76,20 @@ function Register() {
       <div className="log-reg-card">
         <h2>Create Account</h2>
 
+        <InputField
+          type="text"
+          placeholder="First Name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          error={errors.firstName}
+        />
+        <InputField
+          type="text"
+          placeholder="Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          error={errors.lastName}
+        />
         <InputField
           type="email"
           placeholder="Email"
