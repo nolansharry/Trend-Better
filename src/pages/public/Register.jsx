@@ -14,10 +14,10 @@ function Register() {
 
   function validate() {
     const newErrors = {};
-    if(!firstName) {
+    if (!firstName) {
       newErrors.firstName = "First name is required";
     }
-    if(!lastName) {
+    if (!lastName) {
       newErrors.lastName = "Last name is required";
     }
     if (!email) {
@@ -50,27 +50,25 @@ function Register() {
       const response = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: email,
           password: password,
-          fullName: `${firstName} ${lastName}`.trim()
+          fullName: `${firstName} ${lastName}`.trim(),
         }),
       });
 
       const data = await response.json();
-
-      if(!response.ok)
-      {
-        setErrors({email: data.error || "Registration Failed"});
+      if (!response.ok) {
+        setErrors({ email: data.error || "Registration Failed" });
         return;
       }
 
       navigate("/login");
-    } catch(err) {
+    } catch (err) {
       console.error("Failed to connect to the server:", err);
-      setErrors({email: "Server error. Is the backend running? "});
+      setErrors({ email: "Server error. Is the backend running? " });
     }
   }
   return (
