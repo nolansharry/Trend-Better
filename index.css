@@ -89,7 +89,9 @@ h2 {
 
 .main-sidebar-area {
   width: 72px;
+  height: 100vh;
   border-right: 1px solid var(--border);
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,6 +101,7 @@ h2 {
 .main-content-area {
   flex: 1;
   display: flex;
+  margin-left: 72px;
 }
 
 .home-content {
