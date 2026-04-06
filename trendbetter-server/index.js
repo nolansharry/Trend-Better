@@ -11,7 +11,10 @@ const authRoutes = require("./routes/authRoutes");
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true,
+}));
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
@@ -33,6 +36,11 @@ app.use("/api/auth", authRoutes);
 app.get("/", (req, res) => res.send("TrendBetter API is running!"));
 app.use("/api/users", userRoutes);
 
+// Add this AFTER all routes, at the bottom of index.js
+app.use((err, req, res, next) => {
+  console.error("Express error handler:", err);
+  res.status(500).json({ error: err.message });
+});
 
 // Start
 const PORT = process.env.PORT || 5000;

@@ -20,7 +20,11 @@ const userSchema = new mongoose.Schema({
     sparse: true,
     trim: true,
   },
-  fullName: {
+  firstName: {
+    type: String,
+    trim: true,
+  },
+  lastName: {
     type: String,
     trim: true,
   },
@@ -39,10 +43,9 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true });  // replaces dateJoined, also adds updatedAt
 
 // Hash password before saving
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+userSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
   this.password = await bcrypt.hash(this.password, 12);
-  next();
 });
 
 // Strip password from any JSON response automatically

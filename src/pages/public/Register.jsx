@@ -1,25 +1,25 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import InputField from "../../components/InputField";
 import Button from "../../components/SubmitButton";
 
 function Register() {
   const navigate = useNavigate();
+  const { register } = useAuth();
+
+  // ✅ all state declarations were missing
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
-  const [errors, setErrors] = useState({});
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [errors, setErrors] = useState({});
 
   function validate() {
     const newErrors = {};
-    if (!firstName) {
-      newErrors.firstName = "First name is required";
-    }
-    if (!lastName) {
-      newErrors.lastName = "Last name is required";
-    }
+    if (!firstName) newErrors.firstName = "First name is required";
+    if (!lastName) newErrors.lastName = "Last name is required";
     if (!email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
@@ -27,54 +27,38 @@ function Register() {
     }
     if (!password) {
       newErrors.password = "Password is required";
-    }
-    if (!confirm) {
-      newErrors.confirm = "Password is required";
-    } else if (password !== confirm) {
-      newErrors.password = "Passwords do not match";
-      newErrors.confirm = "Passwords do not match";
     } else if (password.length < 6) {
       newErrors.password = "Password must be at least 6 characters long";
+    }
+    if (!confirm) {
+      newErrors.confirm = "Confirm password is required";
+    } else if (password !== confirm) {
+      newErrors.confirm = "Passwords do not match";
     }
     return newErrors;
   }
 
   async function handleSubmit() {
     const newErrors = validate();
-    if (newErrors.email || newErrors.password || newErrors.confirm) {
+    if (Object.keys(newErrors).length > 0) {  // ✅ catches all errors including firstName/lastName
       setErrors(newErrors);
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          fullName: `${firstName} ${lastName}`.trim(),
-        }),
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        setErrors({ email: data.error || "Registration Failed" });
-        return;
-      }
-
-      navigate("/login");
+      await register(email, password, firstName, lastName); // ✅ uses AuthContext
+      navigate("/");
     } catch (err) {
-      console.error("Failed to connect to the server:", err);
-      setErrors({ email: "Server error. Is the backend running? " });
+      setErrors({ server: err.message });
     }
   }
+
   return (
     <div className="log-reg-container">
       <div className="log-reg-card">
         <h2>Create Account</h2>
+
+        {errors.server && <p className="error-message">{errors.server}</p>}
 
         <InputField
           type="text"
@@ -123,4 +107,5 @@ function Register() {
     </div>
   );
 }
+
 export default Register;
