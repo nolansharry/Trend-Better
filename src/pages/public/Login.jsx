@@ -28,40 +28,24 @@ function Login() {
 
   async function handleSubmit() {
     const newErrors = validate();
-    if (newErrors.email || newErrors.password) {
+    if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const userData = await response.json();
-
-      if (!response.ok) {
-        if (userData.error === "Invalid Password") {
-          setErrors({ password: userData.error });
-          return;
-        }
-        if (userData.error === "Email not found") {
-          setErrors({ email: userData.error });
-          return;
-        }
-
-        setErrors("Login Failed");
-        return;
-      }
-
-      login(userData);
+      await login(email, password);  // ✅ use AuthContext login, not raw fetch
       navigate("/");
     } catch (err) {
-      setErrors({ email: "Server error. Is the backend running?" });
+      // ✅ map backend error messages to the right field
+      if (err.message === "Invalid credentials") {
+        setErrors({
+          server: "Invalid email or password.",
+          suggest: true,         // flag to show register suggestion
+        });
+      } else {
+        setErrors({ server: err.message });
+      }
     }
   }
 
@@ -69,6 +53,17 @@ function Login() {
     <div className="log-reg-container">
       <div className="log-reg-card">
         <h2>Login</h2>
+
+        {errors.server && (
+          <div className="error-message">
+            <p>{errors.server}</p>
+            {errors.suggest && (       // ✅ suggest registering on bad credentials
+              <p className="log-reg-suggest">
+                <Link className="log-reg-link" to="/register">Create account here.</Link>
+              </p>
+            )}
+          </div>
+        )}
 
         <InputField
           type="email"
@@ -94,4 +89,5 @@ function Login() {
     </div>
   );
 }
+
 export default Login;
