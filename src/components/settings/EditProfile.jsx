@@ -3,9 +3,25 @@ import { useAuth } from "../../context/AuthContext";
 
 export default function EditProfile() {
   console.log("EditProfile rendering");
+  const { user: authUser, updateProfile } = useAuth();
   const [bio, setBio] = useState("");
-  const [gender, setGender] = useState("Male");
-  const { user: authUser } = useAuth();
+  const [gender, setGender] = useState(authUser?.gender || "Prefer not to say");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  
+  const handleSubmit = async () => {
+    try {
+      setIsSubmitting(true);
+      
+      await updateProfile({ bio, gender });
+      
+      alert("Profile updated successfully!");
+    } catch (error) {
+      alert("Error: " + error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="edit-profile-container">
@@ -61,7 +77,13 @@ export default function EditProfile() {
         </p>
       </div>
 
-      <button className={`submit-btn ${bio ? "active" : ""}`}>Submit</button>
+      <button 
+        className={`submit-btn ${bio ? "active" : ""}`}
+        onClick={handleSubmit}
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? "Saving..." : "Submit"}
+      </button>
     </div>
   );
 }

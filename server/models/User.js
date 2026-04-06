@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
     bio: {
       type: String,
       maxLength: 150,
-      default: "Trendbetter user",
+      default: " ",
     },
     gender: {
       type: String,
