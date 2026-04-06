@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const register = async (email, password, firstName, lastName) => {
-    const res = await fetch("http://localhost:5000/api/auth/register", // ✅ port 5000 not 3000
+    const res = await fetch("http://127.0.0.1:5000/api/auth/register", // ✅ port 5000 not 3000
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -24,14 +24,10 @@ export function AuthProvider({ children }) {
 
     const data = await res.json();
     if (!res.ok) throw new Error(data.error); // ✅ data.error not data.message, matches your backend
-
-    const userData = { id: data._id, email, firstName, lastName };
-    setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
   };
 
   const login = async (email, password) => {
-    const res = await fetch("http://localhost:5000/api/auth/login", {
+    const res = await fetch("http://127.0.0.1:5000/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -41,7 +37,12 @@ export function AuthProvider({ children }) {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error);
 
-    const userData = { id: data._id, email };
+    const userData = { 
+      id: data._id, 
+      email: data.email, 
+      firstName: data.firstName, 
+      lastName: data.lastName 
+    };
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
   };

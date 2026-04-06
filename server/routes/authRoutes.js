@@ -28,9 +28,6 @@ router.post("/register", async (req, res) => {
     console.log("3. Saving user...");
     const savedUser = await newUser.save();
 
-    console.log("4. Setting session...");
-    req.session.userId = savedUser._id;      // ✅ set session
-
     console.log("5. Sending response...");
     res.status(201).json(savedUser);         // password stripped by toJSON transform
   } catch (err) {

@@ -47,7 +47,7 @@ function Register() {
 
     try {
       await register(email, password, firstName, lastName); // ✅ uses AuthContext
-      navigate("/");
+      navigate("/login");
     } catch (err) {
       setErrors({ server: err.message });
     }

@@ -103,8 +103,8 @@ function UserProfile() {
   const {user: authUser} = useAuth();
 
   const user = {
-    name: authUser?.fullName || "TrendBetter User",
-    username: authUser?.email ? `@${authUser.email.split('@')[0]}` : "@user", // Creates a fake handle from their email
+    name: authUser?.firstName ? `${authUser.firstName} ${authUser.lastName}` : "TrendBetter User",
+    username: authUser?.email ? `@${authUser.email.split('@')[0]}` : "@user", 
     bio: authUser?.bio || "Finance enthusiast. Investor. Always watching the market.",
     avatarUrl: authUser?.avatarUrl || null,
   };
