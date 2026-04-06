@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,17 +13,6 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-<<<<<<< Updated upstream
-    "connect-mongo": "^6.0.0",
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.0",
-    "express": "^5.2.1",
-    "express-session": "^1.19.0",
-    "mongoose": "^9.3.3"
-=======
     "bcryptjs": "^3.0.3",
     "connect-mongo": "^6.0.0",
     "cors": "^2.8.6",
@@ -34,6 +25,5 @@
   "devDependencies": {
     "concurrently": "^9.2.1",
     "nodemon": "^3.1.14"
->>>>>>> Stashed changes
   }
 }
