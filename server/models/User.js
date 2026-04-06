@@ -1,46 +1,52 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
-const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
-    trim: true,
+const userSchema = new mongoose.Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      minLength: 6,
+    },
+    username: {
+      type: String,
+      unique: true,
+      sparse: true,
+      trim: true,
+    },
+    firstName: {
+      type: String,
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      trim: true,
+    },
+    bio: {
+      type: String,
+      maxLength: 150,
+      default: "Trendbetter user",
+    },
+    gender: {
+      type: String,
+      enum: ["Male", "Female", "Prefer not to say", "Custom"],
+      default: "Prefer not to say",
+    },
+    avatarUrl: {
+      type: String,
+      default:
+        "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg",
+    },
   },
-  password: {
-    type: String,
-    required: true,
-    minLength: 6,
-  },
-  username: {
-    type: String,
-    unique: true,
-    sparse: true,
-    trim: true,
-  },
-  firstName: {
-    type: String,
-    trim: true,
-  },
-  lastName: {
-    type: String,
-    trim: true,
-  },
-  bio: {
-    type: String,
-    maxLength: 150,
-  },
-  gender: {
-    type: String,
-    enum: ["Male", "Female", "Prefer not to say", "Custom"],
-    default: "Prefer not to say",
-  },
-  avatarUrl: {
-    type: String,
-  },
-}, { timestamps: true });  // replaces dateJoined, also adds updatedAt
+  { timestamps: true },
+); // replaces dateJoined, also adds updatedAt
 
 // Hash password before saving
 userSchema.pre("save", async function () {
